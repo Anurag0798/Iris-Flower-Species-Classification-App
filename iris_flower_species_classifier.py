@@ -47,7 +47,7 @@ def predict_data(data, model, scalar):
 
 def main():
     st.title("Iris Flower Species Classification App")
-    st.write("Enter the data to get a prediction for the Iris Flower Species")
+    st.write("Enter the data below to get a prediction for the Iris Flower Species")
 
     log_reg_binary_model, log_reg_ovr_multiclass_model, log_reg_multinomial_multiclass_model, svc_binary_model, svc_multiclass_model, scalar_binary, scalar_multiclass, svc_binary_scalar, svc_multiclass_scalar = load_models()
 
@@ -60,13 +60,13 @@ def main():
         "Logistic Regression Binary Classification",
         "Logistic Regression OVR Multiclass Classification",
         "Logistic Regression Multinomial Multiclass Classification",
-        "SVM(C) Binary Classification",
-        "SVM(C) Multiclass Classification"
+        "SVM Binary Classification",
+        "SVM Multiclass Classification"
     ]
 
-    selected_model = st.selectbox("Select a model", model_options)
+    selected_model = st.selectbox("Select a model to predict the species", model_options)
 
-    if st.button("Classify the Species"):
+    if st.button("Classify the species"):
         user_data = {
             "sepal length (cm)": sepal_length,
             "sepal width (cm)": sepal_width,
@@ -80,9 +80,9 @@ def main():
             prediction = predict_data(user_data, log_reg_ovr_multiclass_model, scalar_multiclass)
         elif selected_model == "Logistic Regression Multinomial Multiclass Classification":
             prediction = predict_data(user_data, log_reg_multinomial_multiclass_model, scalar_multiclass)
-        elif selected_model == "SVM(C) Binary Classification":
+        elif selected_model == "SVM Binary Classification":
             prediction = predict_data(user_data, svc_binary_model, svc_binary_scalar)
-        elif selected_model == "SVM(C) Multiclass Classification":
+        elif selected_model == "SVM Multiclass Classification":
             prediction = predict_data(user_data, svc_multiclass_model, svc_multiclass_scalar)
 
         if prediction == 0:
@@ -92,7 +92,7 @@ def main():
         elif prediction == 2:
             prediction = "Virginica"
 
-        st.success(f"Prediction using {selected_model}: {prediction}")
+        st.success(f"The specie of the flower is {prediction} using the {selected_model} classifier")
 
 
 
