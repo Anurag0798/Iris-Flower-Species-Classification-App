@@ -1,7 +1,7 @@
 # Iris Flower Species Classification App
 
 ## Overview
-The Iris Flower Species Classification App is a Streamlit application that accepts sepal and petal measurements, uses a classification model, predicts the Iris species (setosa, versicolor, virginica), and can optionally store inputs and predictions for analysis. The repository contains the Streamlit app, a requirements file, and a model artifact (pickle/joblib).
+The Iris Flower Species Classification App is a Streamlit application that accepts sepal and petal measurements, uses classification models, predicts the Iris species (setosa, versicolor, virginica), and can optionally store inputs and predictions for analysis. The repository contains the Streamlit app, a requirements file, and a model artifact (pickle/joblib).
 
 Repository:
 ```
@@ -38,13 +38,6 @@ Recommended dependencies to include:
 * numpy
 * scikit-learn
 * joblib (or use pickle)
-
-## Model & Persistence (optional)
-The app expects a pre-trained classifier. Check whether the saved model includes preprocessing (scaler) or if the app applies transforms before prediction. Best practice: save a scikit-learn Pipeline (scaler + estimator) to avoid mismatched transforms.
-
-If you add persistence for telemetry:
-* Use environment variables for connection strings and do not commit credentials.
-* Simple options: append to a CSV file, use SQLite, or push to a remote DB (MongoDB/Postgres) with secure credentials.
 
 ## Inputs (UI fields)
 The Streamlit app collects the following numeric inputs (implemented as `number_input` fields):
@@ -88,13 +81,8 @@ streamlit run iris_app.py
 ## Usage
 * Launch the app in your browser via Streamlit.
 * Enter the sepal and petal measurements listed above.
-* Click the predict button to obtain the predicted Iris species. If the model supports it, class probabilities will also be displayed.
-* (Optional) If persistence is enabled, inputs + predictions will be saved according to your configuration (CSV/DB).
-
-## Data Storage
-If you enable telemetry/persistence, store only necessary fields and avoid sensitive information. Options include:
-* Appending to a CSV or SQLite database for local analysis.
-* Pushing to a remote database (MongoDB, Postgres) - ensure credentials are stored securely and not committed.
+* Click the predict button to obtain the predicted Iris species.
+* The inputs and outputs will also be persisted in the MongoDB database.
 
 ## Troubleshooting
 * If model loading fails, confirm the model file exists and was serialized with a compatible Python and scikit-learn version.
@@ -113,4 +101,3 @@ Please avoid adding secrets or large model files containing sensitive informatio
 
 ## License
 This project is licensed under the MIT License - see the LICENSE file for details.
-
